@@ -14,8 +14,8 @@
 
 
 -- Volcando estructura de base de datos para mapped
-CREATE DATABASE IF NOT EXISTS `mapped` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `mapped`;
+CREATE DATABASE IF NOT EXISTS `mapped_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `mapped_db`;
 
 -- Volcando estructura para tabla mapped.communities
 CREATE TABLE IF NOT EXISTS `communities` (
