@@ -3,10 +3,10 @@
 class Database
 {
     public $conn;
-    private $host = "127.0.0.1";
-    private $database_name = "phpapidb";
+    private $host = "127.0.0.1:8889";
+    private $database_name = "mapped_db";
     private $username = "root";
-    private $password = "xxxxxxxx";
+    private $password = "root";
 
     public function getConnection()
     {
