@@ -3,10 +3,10 @@
 class Database
 {
     public $conn;
-    private $host = "127.0.0.1:8889";
-    private $database_name = "mapped_db";
-    private $username = "root";
-    private $password = "root";
+    private $host = "db-mysql-fra1-01234-do-user-11603544-0.b.db.ondigitalocean.com:25060";
+    private $database_name = "defaultdb";
+    private $username = "doadmin";
+    private $password = "AVNS_04wVwgxHKRqiop8";
 
     public function getConnection()
     {
