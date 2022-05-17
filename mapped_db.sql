@@ -5,7 +5,7 @@
 -- HeidiSQL Versión:             11.2.0.6213
 -- --------------------------------------------------------
 
-CREATE DATABASE IF NOT EXISTS `mapped_db`
+CREATE DATABASE IF NOT EXISTS `mapped_db`;
 USE `mapped_db`;
 
 CREATE TABLE IF NOT EXISTS `communities` (
