@@ -55,7 +55,8 @@ class User
 
     public function getSingleUser()
     {
-        $sqlQuery = "SELECT * FROM" . $this->db_table . "WHERE id = ? LIMIT 0,1";
+
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE user_id = ? LIMIT 0,1";
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->bindParam(1, $this->user_id);
