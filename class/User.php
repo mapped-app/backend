@@ -40,6 +40,7 @@ class User
         */
 
         // bind data
+        $stmt->bindParam(":user_id", $this->user_id);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":password", $this->password);
