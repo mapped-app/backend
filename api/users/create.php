@@ -13,17 +13,19 @@ $database = new Database();
 $db = $database->getConnection();
 $item = new User($db);
 $data = json_decode(file_get_contents("php://input"));
+
 $item->user_id = substr(md5(rand()), 0, 15);
 $item->name = $data->name;
 $item->email = $data->email;
 $item->password = $data->password;
 $item->phone = $data->phone;
-$item->is_active = $data->is_active;
+$item->is_active = true;
 $item->created = date('Y-m-d H:i:s');
 
 if ($item->createUser()) {
     http_response_code(200);
     echo json_encode(array("message" => "User was created.", "user_id" => $item->user_id));
 } else {
+    http_response_code(503);
     echo 'User could not be created.';
 }
