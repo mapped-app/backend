@@ -14,7 +14,7 @@ $db = $database->getConnection();
 $item = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
-$item->user_id = substr(md5(rand()), 0, 15);
+$item->user_id = 2;
 $item->name = $data->name;
 $item->email = $data->email;
 $item->password = $data->password;
