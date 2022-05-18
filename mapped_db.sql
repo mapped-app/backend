@@ -1,17 +1,14 @@
-
 CREATE DATABASE IF NOT EXISTS `mapped_db`
 USE `mapped_db`;
 
--- Volcando estructura para tabla mapped_db.communities
+
 CREATE TABLE IF NOT EXISTS `communities` (
   `community_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`community_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla mapped_db.provinces
 CREATE TABLE IF NOT EXISTS `provinces` (
   `province_id` int(11) NOT NULL AUTO_INCREMENT,
   `community_id` int(11) DEFAULT NULL,
@@ -21,10 +18,7 @@ CREATE TABLE IF NOT EXISTS `provinces` (
   CONSTRAINT `provinces_ibfk_1` FOREIGN KEY (`community_id`) REFERENCES `communities` (`community_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
 
-
--- Volcando estructura para tabla mapped_db.cities
 CREATE TABLE IF NOT EXISTS `cities` (
   `city_id` int(11) NOT NULL AUTO_INCREMENT,
   `province_id` int(11) DEFAULT NULL,
@@ -34,18 +28,14 @@ CREATE TABLE IF NOT EXISTS `cities` (
   CONSTRAINT `cities_ibfk_1` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`province_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla mapped_db.categories
 CREATE TABLE IF NOT EXISTS `categories` (
   `category_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`category_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla mapped_db.stays
 CREATE TABLE IF NOT EXISTS `stays` (
   `stay_id` int(11) NOT NULL AUTO_INCREMENT,
   `city_id` int(11) DEFAULT NULL,
@@ -58,9 +48,7 @@ CREATE TABLE IF NOT EXISTS `stays` (
   CONSTRAINT `FK_stays_cities` FOREIGN KEY (`city_id`) REFERENCES `cities` (`city_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
 
--- Volcando estructura para tabla mapped_db.sites
 CREATE TABLE IF NOT EXISTS `sites` (
   `site_id` int(11) NOT NULL AUTO_INCREMENT,
   `city_id` int(11) DEFAULT NULL,
@@ -104,7 +92,6 @@ CREATE TABLE IF NOT EXISTS `travels` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 
--- Volcando estructura para tabla mapped_db.sites_visited
 CREATE TABLE IF NOT EXISTS `sites_visited` (
   `travel_id` int(11) NOT NULL,
   `site_id` int(11) NOT NULL,
@@ -117,10 +104,7 @@ CREATE TABLE IF NOT EXISTS `sites_visited` (
   CONSTRAINT `FK_sites_visited_travels` FOREIGN KEY (`travel_id`) REFERENCES `travels` (`travel_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
 
-
--- Volcando estructura para tabla mapped_db.booked_stays
 CREATE TABLE IF NOT EXISTS `booked_stays` (
   `travel_id` int(11) NOT NULL,
   `stay_id` int(11) NOT NULL,
@@ -132,5 +116,3 @@ CREATE TABLE IF NOT EXISTS `booked_stays` (
   CONSTRAINT `FK_booked_stays_stays` FOREIGN KEY (`stay_id`) REFERENCES `stays` (`stay_id`) ON UPDATE CASCADE,
   CONSTRAINT `FK_booked_stays_travels` FOREIGN KEY (`travel_id`) REFERENCES `travels` (`travel_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- La exportación de datos fue deseleccionada.
