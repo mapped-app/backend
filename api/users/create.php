@@ -23,7 +23,11 @@ $item->is_active = 1;
 
 if ($item->createUser()) {
     http_response_code(200);
-    echo json_encode(array("message" => "User was created.", "user_id" => $item->user_id));
+    echo json_encode(array(
+        "status" => "success",
+        "message" => "User was created",
+        "user_id" => $item->user_id
+    ));
 } else {
     echo 'User could not be created.';
 }
