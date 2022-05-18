@@ -14,12 +14,12 @@ $db = $database->getConnection();
 $item = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
-$item->user_id = 2;
+$item->user_id = substr(md5(rand()), 0, 15);
 $item->name = $data->name;
 $item->email = $data->email;
 $item->password = $data->password;
 $item->phone = $data->phone;
-$item->is_active = true;
+$item->is_active = 1;
 $item->created = date('Y-m-d H:i:s');
 
 if ($item->createUser()) {
