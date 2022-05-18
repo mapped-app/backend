@@ -28,6 +28,5 @@ if ($item->createUser()) {
     http_response_code(200);
     echo json_encode(array("message" => "User was created.", "user_id" => $item->user_id));
 } else {
-    http_response_code(503);
     echo 'User could not be created.';
 }
