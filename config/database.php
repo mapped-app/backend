@@ -6,7 +6,7 @@ class Database
     private $host = "db-mysql-fra1-01234-do-user-11603544-0.b.db.ondigitalocean.com:25060";
     private $database_name = "defaultdb";
     private $username = "doadmin";
-    private $password = "AVNS_04wVwgxHKRqiop8";
+    private $password = "AVNS_KlXxL4hF1Em7cZt";
 
     public function getConnection()
     {
