@@ -27,7 +27,7 @@ class User
 
     public function createUser()
     {
-        $sqlQuery = "INSERT INTO" . $this->db_table . "SET user_id = :user_id, name = :name, email = :email, password = :password, phone = :phone, created = :created, is_active = :is_active";
+        $sqlQuery = "INSERT INTO " . $this->db_table . " SET user_id = :user_id, name = :name, email = :email, password = :password, phone = :phone";
 
         $stmt = $this->conn->prepare($sqlQuery);
 
@@ -45,8 +45,6 @@ class User
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":password", $this->password);
         $stmt->bindParam(":phone", $this->phone);
-        $stmt->bindParam(":created", $this->created);
-        $stmt->bindParam(":is_active", $this->is_active);
 
         if ($stmt->execute()) {
             return true;

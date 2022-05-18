@@ -20,7 +20,6 @@ $item->email = $data->email;
 $item->password = $data->password;
 $item->phone = $data->phone;
 $item->is_active = 1;
-$item->created = date('Y-m-d H:i:s');
 
 if ($item->createUser()) {
     http_response_code(200);
