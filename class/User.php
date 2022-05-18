@@ -27,6 +27,14 @@ class User
 
     public function createUser()
     {
+        echo $this->user_id;
+        echo $this->name;
+        echo $this->email;
+        echo $this->password;
+        echo $this->phone;
+        echo $this->is_active;
+        echo $this->created;
+
         $sqlQuery = "INSERT INTO" . $this->db_table . "SET user_id = :user_id, name = :name, email = :email, password = :password, phone = :phone, created = :created, is_active = :is_active";
 
         $stmt = $this->conn->prepare($sqlQuery);
