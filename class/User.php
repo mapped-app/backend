@@ -54,11 +54,27 @@ class User
 
     public function getUserById()
     {
-
         $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE user_id = ? LIMIT 0,1";
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->name = $dataRow['name'];
+        $this->email = $dataRow['email'];
+        $this->password = $dataRow['password'];
+        $this->phone = $dataRow['phone'];
+        $this->created = $dataRow['created'];
+        $this->is_active = $dataRow['is_active'];
+    }
+
+    public function getUserByEmail()
+    {
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE email = ? LIMIT 0,1";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->bindParam(1, $this->email);
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 

@@ -11,11 +11,11 @@ include_once '../../class/User.php';
 $database = new Database();
 $db = $database->getConnection();
 $item = new User($db);
-$item->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
+$item->email = isset($_GET['email']) ? $_GET['email'] : die();
 
-$item->getUserById();
+$item->getUserByEmail();
 
-if ($item->user_id != null) {
+if ($item->email != null) {
     $user_arr = array(
         "user_id" => $item->user_id,
         "name" => $item->name,
