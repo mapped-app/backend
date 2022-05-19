@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `mapped_db`
+
+CREATE DATABASE IF NOT EXISTS `mapped_db`;
 USE `mapped_db`;
 
 
@@ -61,14 +62,15 @@ CREATE TABLE IF NOT EXISTS `sites` (
 
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` varchar(200) NOT NULL,
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(50) NOT NULL DEFAULT '0',
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(200) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `is_active` tinyint(1) DEFAULT 1,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `is_active` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
