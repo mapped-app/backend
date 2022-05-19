@@ -14,7 +14,7 @@ $db = $database->getConnection();
 $item = new User($db);
 $data = json_decode(file_get_contents("php://input"));
 
-$item->user_id = substr(md5(rand()), 0, 15);
+$item->token = substr(md5(rand()), 0, 15);
 $item->name = $data->name;
 $item->email = $data->email;
 $item->password = $data->password;
@@ -26,7 +26,8 @@ if ($item->createUser()) {
     echo json_encode(array(
         "status" => "success",
         "message" => "User was created",
-        "user_id" => $item->user_id
+        "user_id" => $item->user_id,
+        "token" => $item->token
     ));
 } else {
     echo 'User could not be created.';
