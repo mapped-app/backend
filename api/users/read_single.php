@@ -13,7 +13,7 @@ $db = $database->getConnection();
 $item = new User($db);
 $item->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
 
-$item->getSingleUser();
+$item->getUserById();
 
 if ($item->user_id != null) {
     $emp_arr = array(

@@ -52,7 +52,7 @@ class User
         return false;
     }
 
-    public function getSingleUser()
+    public function getUserById()
     {
 
         $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE user_id = ? LIMIT 0,1";
