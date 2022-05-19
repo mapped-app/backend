@@ -18,11 +18,13 @@ $item->getUserById();
 if ($item->user_id != null) {
     $user_arr = array(
         "user_id" => $item->user_id,
+        "token" => $item->token,
         "name" => $item->name,
         "email" => $item->email,
         "password" => $item->password,
         "phone" => $item->phone,
-        "created" => $item->created,
+        "created_at" => $item->created_at,
+        "updated_at" => $item->updated_at,
         "is_active" => $item->is_active
     );
 

@@ -12,8 +12,6 @@ $items = new User($db);
 $stmt = $items->getUsers();
 $itemCount = $stmt->rowCount();
 
-// echo json_encode($itemCount);
-
 if ($itemCount > 0) {
     $userArr = array();
     $userArr["body"] = array();
@@ -23,11 +21,13 @@ if ($itemCount > 0) {
         extract($row);
         $user = array(
             "user_id" => $user_id,
+            "token" => $token,
             "name" => $name,
             "email" => $email,
             "password" => $password,
             "phone" => $phone,
-            "created" => $created,
+            "created_at" => $created_at,
+            "updated_at" => $updated_at,
             "is_active" => $is_active
         );
         $userArr["body"][] = $user;

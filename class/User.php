@@ -4,13 +4,16 @@ class User
 {
     private $conn;
     private $db_table = "users";
+
     public $user_id;
+    public $token;
     public $name;
     public $email;
     public $password;
     public $phone;
+    public $created_at;
+    public $updated_at;
     public $is_active;
-    public $created;
 
     public function __construct($db)
     {
@@ -27,7 +30,7 @@ class User
 
     public function createUser()
     {
-        $sqlQuery = "INSERT INTO " . $this->db_table . " SET user_id = :user_id, name = :name, email = :email, password = :password, phone = :phone";
+        $sqlQuery = "INSERT INTO " . $this->db_table . " SET user_id = :user_id, token = :token, name = :name, email = :email, password = :password, phone = :phone";
 
         $stmt = $this->conn->prepare($sqlQuery);
 
@@ -41,6 +44,7 @@ class User
 
         // bind data
         $stmt->bindParam(":user_id", $this->user_id);
+        $stmt->bindParam(":token", $this->token);
         $stmt->bindParam(":name", $this->name);
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":password", $this->password);
@@ -61,11 +65,14 @@ class User
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        $this->user_id = $dataRow['user_id'];
+        $this->token = $dataRow['token'];
         $this->name = $dataRow['name'];
         $this->email = $dataRow['email'];
         $this->password = $dataRow['password'];
         $this->phone = $dataRow['phone'];
-        $this->created = $dataRow['created'];
+        $this->created_at = $dataRow['created_at'];
+        $this->updated_at = $dataRow['updated_at'];
         $this->is_active = $dataRow['is_active'];
     }
 
@@ -78,11 +85,14 @@ class User
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        $this->user_id = $dataRow['user_id'];
+        $this->token = $dataRow['token'];
         $this->name = $dataRow['name'];
         $this->email = $dataRow['email'];
         $this->password = $dataRow['password'];
         $this->phone = $dataRow['phone'];
-        $this->created = $dataRow['created'];
+        $this->created_at = $dataRow['created_at'];
+        $this->updated_at = $dataRow['updated_at'];
         $this->is_active = $dataRow['is_active'];
     }
 
@@ -128,7 +138,7 @@ class User
 
     function deleteUser()
     {
-        $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE id = ?";
+        $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE user_id = ?";
         $stmt = $this->conn->prepare($sqlQuery);
 
         $this->user_id = htmlspecialchars(strip_tags($this->user_id));
