@@ -32,5 +32,5 @@ if ($item->user_id != null) {
     echo json_encode($user_arr);
 } else {
     http_response_code(404);
-    echo json_encode("User not found.");
+    echo json_encode("User not found");
 }
