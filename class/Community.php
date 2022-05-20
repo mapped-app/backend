@@ -50,6 +50,19 @@ class Community
         $this->name = $dataRow['name'];
     }
 
+    public function getCommunityByName()
+    {
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE name = ? LIMIT 0,1";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->bindParam(1, $this->name);
+        $stmt->execute();
+        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->community_id = $dataRow['community_id'];
+        $this->name = $dataRow['name'];
+    }
+
     public function updateCommunity()
     {
         $sqlQuery = "UPDATE " . $this->db_table . " SET name = :name WHERE community_id = :community_id";

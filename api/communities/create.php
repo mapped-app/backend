@@ -15,18 +15,26 @@ $item = new Community($db);
 $data = json_decode(file_get_contents("php://input"));
 
 $item->name = $data->name;
+$item->getCommunityByName();
 
-if ($item->createCommunity()) {
-    http_response_code(200);
-
-    $item->getCommunityById();
-
-    echo json_encode(array(
-        "status" => "success",
-        "message" => "Community was created",
-        "community_id" => $item->community_id,
-        "name" => $item->name
-    ));
+if ($item->name == $data->name) {
+    http_response_code(400);
+    echo json_encode(array("message" => "Community already exists"));
 } else {
-    echo 'Community could not be created';
+    $item->name = $data->name;
+
+    if ($item->createCommunity()) {
+        http_response_code(200);
+
+        $item->getCommunityByName();
+
+        echo json_encode(array(
+            "status" => "success",
+            "message" => "Community was created",
+            "community_id" => $item->community_id,
+            "name" => $item->name
+        ));
+    } else {
+        echo 'Community could not be created';
+    }
 }
