@@ -1,8 +1,5 @@
 <?php
 
-echo "Hello World";
-
-/*
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
@@ -46,4 +43,3 @@ if ($item->email == $data->email) {
         echo 'User could not be created';
     }
 }
-*/
