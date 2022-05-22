@@ -37,7 +37,10 @@ if ($item->email == $data->email) {
             "status" => "success",
             "message" => "User was created",
             "user_id" => $item->user_id,
-            "token" => $item->token
+            "token" => $item->token,
+            "name" => $item->name,
+            "email" => $item->email,
+            "phone" => $item->phone
         ));
     } else {
         echo 'User could not be created';
