@@ -69,7 +69,6 @@ class User
         $this->token = $dataRow['token'];
         $this->name = $dataRow['name'];
         $this->email = $dataRow['email'];
-        $this->password = $dataRow['password'];
         $this->phone = $dataRow['phone'];
         $this->created_at = $dataRow['created_at'];
         $this->updated_at = $dataRow['updated_at'];
@@ -89,7 +88,6 @@ class User
         $this->token = $dataRow['token'];
         $this->name = $dataRow['name'];
         $this->email = $dataRow['email'];
-        $this->password = $dataRow['password'];
         $this->phone = $dataRow['phone'];
         $this->created_at = $dataRow['created_at'];
         $this->updated_at = $dataRow['updated_at'];
@@ -109,7 +107,6 @@ class User
         $this->token = $dataRow['token'];
         $this->name = $dataRow['name'];
         $this->email = $dataRow['email'];
-        $this->password = $dataRow['password'];
         $this->phone = $dataRow['phone'];
         $this->created_at = $dataRow['created_at'];
         $this->updated_at = $dataRow['updated_at'];
