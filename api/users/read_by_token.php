@@ -12,11 +12,11 @@ include_once '../../class/User.php';
 $database = new Database();
 $db = $database->getConnection();
 $item = new User($db);
-$item->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
+$item->token = isset($_GET['token']) ? $_GET['token'] : die();
 
-$item->getUserById();
+$item->getUserByToken();
 
-if ($item->user_id != null) {
+if ($item->token != null) {
     $user_arr = array(
         "user_id" => $item->user_id,
         "token" => $item->token,
