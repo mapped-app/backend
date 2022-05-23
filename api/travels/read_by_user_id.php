@@ -11,26 +11,36 @@ $db = $database->getConnection();
 $item = new Travel($db);
 $item->user_id = isset($_GET['user_id']) ? $_GET['user_id'] : die();
 
-$item->getTravelByUserId();
+$stmt = $item->getTravelByUserId();
+$itemCount = $stmt->rowCount();
 
-if ($item->travel_id != null) {
-    $travel_arr = array(
-        "travel_id" => $item->travel_id,
-        "city_id" => $item->city_id,
-        "user_id" => $item->user_id,
-        "start_date" => $item->start_date,
-        "end_date" => $item->end_date,
-        "city_origen" => $item->city_origen,
-        "transport" => $item->transport,
-        "transport_cost" => $item->transport_cost,
-        "transport_time" => $item->transport_time,
-        "travel_cost" => $item->travel_cost,
-        "travel_time" => $item->travel_time
-    );
+if ($itemCount > 0) {
+    $travelArr = array();
+    $travelArr["body"] = array();
+    $travelArr["itemCount"] = $itemCount;
 
-    http_response_code(200);
-    echo json_encode($travel_arr);
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+        $travel = array(
+            "travel_id" => $travel_id,
+            "city_id" => $city_id,
+            "user_id" => $user_id,
+            "start_date" => $start_date,
+            "end_date" => $end_date,
+            "city_origen" => $city_origen,
+            "transport" => $transport,
+            "transport_cost" => $transport_cost,
+            "transport_time" => $transport_time,
+            "travel_cost" => $travel_cost,
+            "travel_time" => $travel_time
+        );
+        $travelArr["body"][] = $travel;
+    }
+
+    echo json_encode($travelArr);
 } else {
     http_response_code(404);
-    echo json_encode("Travel not found");
+    echo json_encode(
+        array("message" => "No record found")
+    );
 }
