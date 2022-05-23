@@ -89,6 +89,28 @@ class Travel
         $this->travel_time = $dataRow['travel_time'];
     }
 
+    public function getTravelByUserId()
+    {
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE user_id = ? LIMIT 0,1";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->bindParam(1, $this->user_id);
+        $stmt->execute();
+        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->travel_id = $dataRow['travel_id'];
+        $this->city_id = $dataRow['city_id'];
+        $this->user_id = $dataRow['user_id'];
+        $this->start_date = $dataRow['start_date'];
+        $this->end_date = $dataRow['end_date'];
+        $this->city_origen = $dataRow['city_origen'];
+        $this->transport = $dataRow['transport'];
+        $this->transport_cost = $dataRow['transport_cost'];
+        $this->transport_time = $dataRow['transport_time'];
+        $this->travel_cost = $dataRow['travel_cost'];
+        $this->travel_time = $dataRow['travel_time'];
+    }
+
     // todo
     public function updateTravel()
     {
