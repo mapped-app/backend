@@ -91,7 +91,7 @@ class Travel
 
     public function getTravelByUserId()
     {
-        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE user_id = ? LIMIT 0,1";
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE user_id = ?";
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->bindParam(1, $this->user_id);
