@@ -2,12 +2,11 @@
 
 class City
 {
-    private $conn;
-    private $db_table = "cities";
-
     public $city_id;
     public $province_id;
     public $name;
+    private $conn;
+    private $db_table = "cities";
 
     public function __construct($db)
     {
@@ -45,6 +44,20 @@ class City
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->bindParam(1, $this->city_id);
+        $stmt->execute();
+        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->city_id = $dataRow['city_id'];
+        $this->province_id = $dataRow['province_id'];
+        $this->name = $dataRow['name'];
+    }
+
+    public function getCityByName()
+    {
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE name = ? LIMIT 0,1";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->bindParam(1, $this->name);
         $stmt->execute();
         $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
