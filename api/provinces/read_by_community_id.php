@@ -4,32 +4,32 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
 include_once '../../config/database.php';
-include_once '../../class/City.php';
+include_once '../../class/Province.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$item = new City($db);
-$item->province_id = isset($_GET['province_id']) ? $_GET['province_id'] : die();
+$items = new Province($db);
+$item->province_id = isset($_GET['community_id']) ? $_GET['community_id'] : die();
 
-$item->getCitiesByProvinceId();
+$stmt = $items->getProvincesByCommunityId();
 $itemCount = $stmt->rowCount();
 
 if ($itemCount > 0) {
-    $cityArr = array();
-    $cityArr["body"] = array();
-    $cityArr["itemCount"] = $itemCount;
+    $provinceArr = array();
+    $provinceArr["body"] = array();
+    $provinceArr["itemCount"] = $itemCount;
 
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
-        $city = array(
-            "city_id" => $city_id,
+        $province = array(
             "province_id" => $province_id,
+            "community_id" => $community_id,
             "name" => $name
         );
-        $cityArr["body"][] = $city;
+        $provinceArr["body"][] = $province;
     }
 
-    echo json_encode($cityArr);
+    echo json_encode($provinceArr);
 } else {
     http_response_code(404);
     echo json_encode(

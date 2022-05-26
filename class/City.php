@@ -52,18 +52,13 @@ class City
         $this->name = $dataRow['name'];
     }
 
-    public function getCityByProvinceId()
+    public function getCitiesByProvinceId()
     {
         $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE province_id = ? LIMIT 0,1";
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->bindParam(1, $this->province_id);
         $stmt->execute();
-        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        $this->city_id = $dataRow['city_id'];
-        $this->province_id = $dataRow['province_id'];
-        $this->name = $dataRow['name'];
     }
 
     public function getCityByName()
