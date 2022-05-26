@@ -57,6 +57,7 @@ class City
         $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE province_id = ?";
 
         $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->bindParam(1, $this->province_id);
         $stmt->execute();
         return $stmt;
     }
