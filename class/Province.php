@@ -52,6 +52,18 @@ class Province
         $this->name = $dataRow['name'];
     }
 
+    public function getProvincesByCommunityId()
+    {
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE community_id = ? LIMIT 0,1";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->bindParam(1, $this->community_id);
+        $stmt->execute();
+
+        return $stmt;
+    }
+
+
     public function getProvinceByName()
     {
         $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE name = ? LIMIT 0,1";
