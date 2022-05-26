@@ -11,18 +11,28 @@ $db = $database->getConnection();
 $item = new City($db);
 $item->province_id = isset($_GET['province_id']) ? $_GET['province_id'] : die();
 
-$item->getCityByProvinceId();
+$item->getCitiesByProvinceId();
+$itemCount = $stmt->rowCount();
 
-if ($item->city_id != null) {
-    $city_arr = array(
-        "city_id" => $item->city_id,
-        "province_id" => $item->province_id,
-        "name" => $item->name
-    );
+if ($itemCount > 0) {
+    $cityArr = array();
+    $cityArr["body"] = array();
+    $cityArr["itemCount"] = $itemCount;
 
-    http_response_code(200);
-    echo json_encode($city_arr);
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+        $city = array(
+            "city_id" => $city_id,
+            "province_id" => $province_id,
+            "name" => $name
+        );
+        $cityArr["body"][] = $city;
+    }
+
+    echo json_encode($cityArr);
 } else {
     http_response_code(404);
-    echo json_encode("City not found");
+    echo json_encode(
+        array("message" => "No record found")
+    );
 }
