@@ -8,10 +8,10 @@ include_once '../../class/City.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$item = new City($db);
-$item->province_id = isset($_GET['province_id']) ? $_GET['province_id'] : die();
+$items = new City($db);
+$items->province_id = isset($_GET['province_id']) ? $_GET['province_id'] : die();
 
-$item->getCitiesByProvinceId();
+$stmt = $items->getCityByProvinceId();
 $itemCount = $stmt->rowCount();
 
 if ($itemCount > 0) {
