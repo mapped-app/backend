@@ -54,7 +54,7 @@ class Province
 
     public function getProvincesByCommunityId()
     {
-        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE community_id = ? LIMIT 0,1";
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE community_id = ?";
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->bindParam(1, $this->community_id);

@@ -9,7 +9,7 @@ include_once '../../class/Province.php';
 $database = new Database();
 $db = $database->getConnection();
 $items = new Province($db);
-$item->province_id = isset($_GET['community_id']) ? $_GET['community_id'] : die();
+$items->province_id = isset($_GET['community_id']) ? $_GET['community_id'] : die();
 
 $stmt = $items->getProvincesByCommunityId();
 $itemCount = $stmt->rowCount();
