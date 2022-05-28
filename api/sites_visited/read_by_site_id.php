@@ -8,22 +8,32 @@ include_once '../../class/SiteVisited.php';
 
 $database = new Database();
 $db = $database->getConnection();
-$item = new SiteVisited($db);
-$item->site_id = isset($_GET['site_id']) ? $_GET['site_id'] : die();
+$items = new SiteVisited($db);
+$items->site_id = isset($_GET['site_id']) ? $_GET['site_id'] : die();
 
-$item->getSiteVisitedBySiteId();
+$stmt = $items->getSitesVisitedBySiteId();
+$itemCount = $stmt->rowCount();
 
-if ($item->site_id != null) {
-    $siteVisited_arr = array(
-        "travel_id" => $item->travel_id,
-        "site_id" => $item->site_id,
-        "cost" => $item->cost,
-        "rate" => $item->rate
-    );
+if ($itemCount > 0) {
+    $siteVisitedArr = array();
+    $siteVisitedArr["body"] = array();
+    $siteVisitedArr["itemCount"] = $itemCount;
 
-    http_response_code(200);
-    echo json_encode($siteVisited_arr);
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+        $siteVisited = array(
+            "travel_id" => $travel_id,
+            "site_id" => $site_id,
+            "cost" => $cost,
+            "rate" => $rate
+        );
+        $siteVisitedArr["body"][] = $siteVisited;
+    }
+
+    echo json_encode($siteVisitedArr);
 } else {
     http_response_code(404);
-    echo json_encode("Site Visited not found");
+    echo json_encode(
+        array("message" => "No record found")
+    );
 }
