@@ -94,6 +94,27 @@ class User
         $this->is_active = $dataRow['is_active'];
     }
 
+    public function getUserByEmailAndPassword()
+    {
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE email = ? AND password = ? LIMIT 0,1 ";
+
+        $stmt = $this->conn->prepare($sqlQuery);
+        $stmt->bindParam(1, $this->email);
+        $stmt->bindParam(2, $this->password);
+        $stmt->execute();
+        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $this->user_id = $dataRow['user_id'];
+        $this->token = $dataRow['token'];
+        $this->name = $dataRow['name'];
+        $this->email = $dataRow['email'];
+        $this->password = $dataRow['password'];
+        $this->phone = $dataRow['phone'];
+        $this->created_at = $dataRow['created_at'];
+        $this->updated_at = $dataRow['updated_at'];
+        $this->is_active = $dataRow['is_active'];
+    }
+
     public function getUserByToken()
     {
         $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE token = ? LIMIT 0,1";
