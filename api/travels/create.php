@@ -29,22 +29,9 @@ $item->travel_time = $data->travel_time;
 if ($item->createTravel()) {
     http_response_code(200);
 
-    $item->getTravelById();
-
     echo json_encode(array(
         "status" => "success",
-        "message" => "Travel was created",
-        "travel_id" => $item->travel_id,
-        "city_id" => $item->city_id,
-        "user_id" => $item->user_id,
-        "start_date" => $item->start_date,
-        "end_date" => $item->end_date,
-        "city_origen" => $item->city_origen,
-        "transport" => $item->transport,
-        "transport_cost" => $item->transport_cost,
-        "transport_time" => $item->transport_time,
-        "travel_cost" => $item->travel_cost,
-        "travel_time" => $item->travel_time
+        "message" => "Travel was created"
     ));
 } else {
     echo 'Travel could not be created';
