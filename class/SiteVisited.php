@@ -52,19 +52,15 @@ class SiteVisited
         return $stmt;
     }
 
-    public function getSiteVisitedByTravelId()
+    public function getSitesVisitedByTravelId()
     {
-        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE travel_id = ? LIMIT 0,1";
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " WHERE travel_id = ?";
 
         $stmt = $this->conn->prepare($sqlQuery);
         $stmt->bindParam(1, $this->travel_id);
         $stmt->execute();
-        $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $this->travel_id = $dataRow['travel_id'];
-        $this->site_id = $dataRow['site_id'];
-        $this->cost = $dataRow['cost'];
-        $this->rate = $dataRow['rate'];
+        return $stmt;
     }
 
     // todo
